@@ -9,7 +9,8 @@ ENV GO111MODULE=on
 RUN apt update \
   && go get -u github.com/go-delve/delve/cmd/dlv \
   && go get github.com/jinzhu/gorm \ 
-  && go get github.com/go-sql-driver/mysql
+  && go get github.com/go-sql-driver/mysql \
+  && go install github.com/golang/mock/mockgen@v1.5.0
 
 # API HotReload
 # RUN go get github.com/pilu/fresh
