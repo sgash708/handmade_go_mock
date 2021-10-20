@@ -3,16 +3,20 @@ version: '3'
 services:
   go_server:
     container_name: go_server
-    build: ./server
+    build: 
+      context: .
+      dockerfile: ./docker/golang/Dockerfile
     ports: 
-      - 8888:8888
+      - 8899:8080
+    tty: true
+    stdin_open: true
     volumes:
-      - ./server:/api
+      - ./src/api:/api
 
   mock_mysql:
-    env_file: ./docker/db/.env
-    image: mysql:5.7
+    env_file: .env
     container_name: mock_mysql
+    image: mysql:5.7
     environment: 
       MYSQL_ROOT_PASSWORD: ${MYSQL_RPASS}
       MYSQL_DATABASE: ${MYSQL_DB}
