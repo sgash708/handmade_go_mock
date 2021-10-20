@@ -1,17 +1,18 @@
 version: '3'
 
 services:
-  server:
+  go_server:
+    container_name: go_server
     build: ./server
     ports: 
       - 8888:8888
     volumes:
       - ./server:/api
 
-  db:
-    env_file: .env
+  mock_mysql:
+    env_file: ./docker/db/.env
     image: mysql:5.7
-    container_name: db_sample
+    container_name: mock_mysql
     environment: 
       MYSQL_ROOT_PASSWORD: ${MYSQL_RPASS}
       MYSQL_DATABASE: ${MYSQL_DB}
@@ -24,4 +25,4 @@ services:
       - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./docker/db/sql:/docker-entrypoint-initdb.d
     ports: 
-      - 3306:3306
+      - ${DB_PORT}:3306
