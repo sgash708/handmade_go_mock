@@ -22,9 +22,9 @@ func NewUser(uRepo domain.User, ugRepo domain.UserGroup) *User {
 // Create 登録処理
 func (u *User) Create(user *model.User) (*model.User, error) {
 	/*
-		バリデーション
-		TODO: DDDにおけるバリデーションはどの層に記述すべきか考えたい....
-	*/
+	 * バリデーション
+	 * TODO: DDDにおけるバリデーションはどの層に記述すべきか考えたい....
+	 */
 	if user.Name == "" {
 		return nil, errors.New("user name required")
 	}
@@ -53,4 +53,14 @@ func (u *User) Create(user *model.User) (*model.User, error) {
 	}
 
 	return createdUser, nil
+}
+
+// Read 読出処理
+func (u *User) Read(uID int) (*model.User, error) {
+	readUser, err := u.uRepo.Read(uID)
+	if err != nil {
+		return nil, err
+	}
+
+	return readUser, nil
 }

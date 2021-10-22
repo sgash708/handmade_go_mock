@@ -10,12 +10,18 @@ import (
 type uRepoMock struct {
 	domain.User
 	FakeCreate func(user *model.User) (*model.User, error)
+	// FakeRead   func(user *model.User) (*model.User, error)
 }
 
 // Create ユーザ作成モック
 func (m *uRepoMock) Create(user *model.User) (*model.User, error) {
 	return m.FakeCreate(user)
 }
+
+// Read ユーザ作成モック
+// func (m *uRepoMock) Read(user *model.User) (*model.User, error) {
+// 	return m.FakeRead(user)
+// }
 
 /*
 	モックの肝：
