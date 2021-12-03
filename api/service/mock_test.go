@@ -53,5 +53,5 @@ func (m *ugRepoMock) AddUser(ugID int, uID int) error {
 	→ interfaceは匿名フィールドになる
 	→ interfaceは必要なメソッド定義を全て持っている
 		→ structも必要なメソッド定義を持っている
-		→ interfaceを満たしている
+		→ interface を満たしている
 */

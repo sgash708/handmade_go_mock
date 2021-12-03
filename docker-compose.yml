@@ -3,30 +3,30 @@ version: '3'
 services:
   go_server:
     container_name: go_server
-    build: 
+    build:
       context: .
       dockerfile: ./docker/golang/Dockerfile
-    ports: 
+    ports:
       - 8899:8080
     tty: true
     stdin_open: true
     volumes:
-      - ./src/api:/api
+      - ./api:/api
 
   mock_mysql:
     env_file: .env
     container_name: mock_mysql
     image: mysql:5.7
-    environment: 
+    environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_RPASS}
       MYSQL_DATABASE: ${MYSQL_DB}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASS}
       TZ: ${DB_TZ}
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    volumes: 
+    volumes:
       - ./docker/db/data:/var/lib/mysql
       - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./docker/db/sql:/docker-entrypoint-initdb.d
-    ports: 
+    ports:
       - ${DB_PORT}:3306
